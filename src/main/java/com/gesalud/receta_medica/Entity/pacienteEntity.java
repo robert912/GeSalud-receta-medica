@@ -10,9 +10,15 @@ public class pacienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona", referencedColumnName = "id")
     private personaEntity persona;
+
+    @Column(name = "prevision", length = 80)
+    private String prevision;
+
+    @Column(name = "activo")
+    private boolean activo;
 }
