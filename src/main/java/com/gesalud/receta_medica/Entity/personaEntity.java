@@ -31,4 +31,7 @@ public class personaEntity {
 
     @Column(name = "correo",  length = 50)
     private  String correo;
+
+    @Column(name = "activo")
+    private boolean activo;
 }
