@@ -22,7 +22,7 @@ public class medicamentoService {
     }
 
     // Todas los medicamento activas e inactivas
-    public List<medicamentoEntity> obtenermedicamentoAll() {
+    public List<medicamentoEntity> obtenerMedicamentoAll() {
         return medicamentoRepository.findAll();
     }
 

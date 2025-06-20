@@ -12,17 +12,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/medicamento")
-public class MedicamentoController {
+public class medicamentoController {
     private medicamentoService medService;
 
     @Autowired
-    public MedicamentoController(medicamentoService medService) {
+    public medicamentoController(medicamentoService medService) {
         this.medService = medService;
     }
 
     @GetMapping ("/all")//GET -> /medicamento/all
     public ResponseEntity<List<medicamentoEntity>> obtenerTodosLosMedicamento(){
-        List<medicamentoEntity> medicamento = medService.obtenermedicamentoAll();
+        List<medicamentoEntity> medicamento = medService.obtenerMedicamentoAll();
         return ResponseEntity.ok(medicamento);
     }
 
