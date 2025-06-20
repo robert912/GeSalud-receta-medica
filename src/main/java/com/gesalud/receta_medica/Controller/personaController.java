@@ -32,7 +32,6 @@ public class personaController {
         return ResponseEntity.ok(personas);//new
     }
 
-
     @GetMapping("/{rut}") //GET -> /api/persona/17411947-3
     public ResponseEntity<personaEntity> obtenerPersonaPorRut(@PathVariable String rut){
         return perService.obtenerPersonaByRut(rut)
@@ -40,16 +39,22 @@ public class personaController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // POST -> /api/persona
     @PostMapping
-    public ResponseEntity<personaEntity> crearPersona(@RequestBody personaEntity nuevaPersona) {
-        nuevaPersona.setActivo(true); // Activo por defecto
+    public ResponseEntity<?> crearPersona(@RequestBody personaEntity nuevaPersona) {
+        Optional<personaEntity> existente = perService.obtenerPersonaByRut(nuevaPersona.getRut());
+
+        if (existente.isPresent()) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("La persona con RUT " + nuevaPersona.getRut() + " ya existe.");
+        }
+
+        nuevaPersona.setActivo(true);
         personaEntity personaCreada = perService.guardarPersona(nuevaPersona);
         return new ResponseEntity<>(personaCreada, HttpStatus.CREATED);
     }
 
-    // PUT -> /api/persona/{id}
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // PUT -> /api/persona/{id}
     public ResponseEntity<personaEntity> actualizarPersona(@PathVariable Long id, @RequestBody personaEntity personaActualizada) {
         Optional<personaEntity> personaExistente = perService.obtenerPersonaById(id);
         if (personaExistente.isPresent()) {
@@ -73,8 +78,9 @@ public class personaController {
             if (personaActualizada.getCorreo() != null && !personaActualizada.getCorreo().isBlank()) {
                 persona.setCorreo(personaActualizada.getCorreo());
             }
-
-            persona.setActivo(personaActualizada.isActivo());
+            if (personaActualizada.getActivo() != null) {
+                persona.setActivo(personaActualizada.getActivo());
+            }
 
             return new ResponseEntity<>(perService.guardarPersona(persona), HttpStatus.OK);
         } else {
@@ -82,10 +88,9 @@ public class personaController {
         }
     }
 
-    // DELETE lógico -> /api/persona/{id}
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // DELETE lógico -> /api/persona/{id}
     public ResponseEntity<Void> eliminarPersonaLogicamente(@PathVariable Long id) {
-        Optional<personaEntity> personaExistente = perService.obtenerPersonaById(id);
+        Optional<personaEntity> personaExistente = perService.PersonaByIdActivo(id);
         if (personaExistente.isPresent()) {
             personaEntity persona = personaExistente.get();
             persona.setActivo(false);

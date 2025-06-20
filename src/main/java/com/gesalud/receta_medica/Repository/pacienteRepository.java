@@ -7,13 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface pacienteRepository extends JpaRepository<pacienteEntity, Integer> {
-    // Para búsquedas individuales por Rut
-   // Optional<pacienteEntity> findByRut(String rut);
-
+public interface pacienteRepository extends JpaRepository<pacienteEntity, Long> {
     // Metodo para listar solo personas activas
     List<pacienteEntity> findByActivoTrue();
 
     // Para búsquedas individuales por ID, si necesitas validar estado activo
     Optional<pacienteEntity> findByIdAndActivoTrue(Long id);
+
+    Optional<pacienteEntity> findByPersona(personaEntity persona);
 }

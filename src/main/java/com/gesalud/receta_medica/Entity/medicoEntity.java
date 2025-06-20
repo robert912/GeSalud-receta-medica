@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "paciente")
-public class pacienteEntity {
+@Table(name = "medico")
+public class medicoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,8 +16,8 @@ public class pacienteEntity {
     @JoinColumn(name = "id_persona", referencedColumnName = "id")
     private personaEntity persona;
 
-    @Column(name = "prevision", length = 80)
-    private String prevision;
+    @Column(name = "especialidad", length = 120)
+    private String especialidad;
 
     @Column(name = "activo")
     private Boolean activo;

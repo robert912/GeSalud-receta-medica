@@ -33,5 +33,5 @@ public class personaEntity {
     private  String correo;
 
     @Column(name = "activo")
-    private boolean activo;
+    private Boolean activo;
 }

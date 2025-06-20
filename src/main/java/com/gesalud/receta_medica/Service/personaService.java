@@ -20,6 +20,7 @@ public class personaService {
     public personaEntity guardarPersona(personaEntity persona) {
         return personaRepository.save(persona);
     }
+
     // Todas las personas activas e inactivas
     public List<personaEntity> obtenerPersonaAll() {
         return personaRepository.findAll();
@@ -33,11 +34,16 @@ public class personaService {
     // Persona por rut
     public Optional<personaEntity> obtenerPersonaByRut(String rut) {
         return personaRepository.findByRut(rut)
-                .filter(persona -> persona.isActivo()); // filtrar solo activos
+                .filter(persona -> persona.getActivo()); // filtrar solo activos
     }
 
-    // Para PUT y DELETE lógico por ID
+    // Para PUT
     public Optional<personaEntity> obtenerPersonaById(Long id) {
         return personaRepository.findById(id);
+    }
+
+    // Para DELETE lógico por ID
+    public Optional<personaEntity> PersonaByIdActivo(Long id) {
+        return personaRepository.findByIdAndActivoTrue(id);
     }
 }
