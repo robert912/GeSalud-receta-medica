@@ -2,6 +2,7 @@ package com.gesalud.receta_medica.Controller;
 
 import com.gesalud.receta_medica.Entity.recetaEntity;
 import com.gesalud.receta_medica.Service.recetaService;
+import com.gesalud.receta_medica.dto.recetaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +35,8 @@ public class recetaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearReceta(@RequestBody recetaEntity nuevaReceta) {
-        nuevaReceta.setFechaCreacion(LocalDate.now());
-        nuevaReceta.setDisponible(true);
-        nuevaReceta.setActivo(true);
-        recetaEntity recetaCreada = recService.guardarReceta(nuevaReceta);
+    public ResponseEntity<?> crearReceta(@RequestBody recetaDTO nuevaReceta) {
+        recetaEntity recetaCreada = recService.guardarRecetaDTO(nuevaReceta);
         return new ResponseEntity<>(recetaCreada, HttpStatus.CREATED);
     }
 

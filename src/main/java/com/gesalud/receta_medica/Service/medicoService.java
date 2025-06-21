@@ -70,4 +70,8 @@ public class medicoService {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(medicoCreado);
     }
+
+    public Optional<medicoEntity> buscarPorId(Long id) {
+        return medicoRepository.findById(id);
+    }
 }

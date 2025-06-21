@@ -71,4 +71,7 @@ public class pacienteService {
         return ResponseEntity.status(HttpStatus.CREATED).body(pacienteCreado);
     }
 
+    public Optional<pacienteEntity> buscarPorId(Long id) {
+        return pacienteRepository.findById(id);
+    }
 }
