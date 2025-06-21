@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/persona")
+@RequestMapping("/persona")
 public class personaController {
     private personaService perService;
 
@@ -20,19 +20,19 @@ public class personaController {
         this.perService = perService;
     }
 
-    @GetMapping ("/all")//GET -> /api/persona/all
+    @GetMapping ("/all")//GET -> /persona/all
     public ResponseEntity<List<personaEntity>> obtenerTodasLasPersonas(){
         List<personaEntity> personas = perService.obtenerPersonaAll();
         return ResponseEntity.ok(personas);//new
     }
 
-    @GetMapping //GET -> /api/persona
+    @GetMapping //GET -> /persona
     public ResponseEntity<List<personaEntity>> todasLasPersonasActivas(){
         List<personaEntity> personas = perService.obtenerPersonasActivas();
         return ResponseEntity.ok(personas);//new
     }
 
-    @GetMapping("/{rut}") //GET -> /api/persona/17411947-3
+    @GetMapping("/{rut}") //GET -> /persona/17411947-3
     public ResponseEntity<personaEntity> obtenerPersonaPorRut(@PathVariable String rut){
         return perService.obtenerPersonaByRut(rut)
                 .map(persona -> new ResponseEntity<>(persona, HttpStatus.OK))
@@ -54,7 +54,7 @@ public class personaController {
         return new ResponseEntity<>(personaCreada, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}") // PUT -> /api/persona/{id}
+    @PutMapping("/{id}") // PUT -> /persona/{id}
     public ResponseEntity<personaEntity> actualizarPersona(@PathVariable Long id, @RequestBody personaEntity personaActualizada) {
         Optional<personaEntity> personaExistente = perService.obtenerPersonaById(id);
         if (personaExistente.isPresent()) {
@@ -88,7 +88,7 @@ public class personaController {
         }
     }
 
-    @DeleteMapping("/{id}") // DELETE lógico -> /api/persona/{id}
+    @DeleteMapping("/{id}") // DELETE lógico -> /persona/{id}
     public ResponseEntity<Void> eliminarPersonaLogicamente(@PathVariable Long id) {
         Optional<personaEntity> personaExistente = perService.PersonaByIdActivo(id);
         if (personaExistente.isPresent()) {
