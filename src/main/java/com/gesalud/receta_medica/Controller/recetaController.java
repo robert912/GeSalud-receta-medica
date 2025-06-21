@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +68,20 @@ public class recetaController {
         }
     }
 
+    @PutMapping("/bloquear/{id}") // PUT -> /receta/bloquear/{id} //Cambiar estado de receta a no disponible
+    public ResponseEntity<recetaEntity> bloquearReceta(@PathVariable Long id) {
+        Optional<recetaEntity> recetaExistente = recService.buscarRecetaPorId(id);
+
+        if (recetaExistente.isPresent()) {
+            recetaEntity receta = recetaExistente.get();
+            receta.setDisponible(false);
+            recetaEntity recetaActualizada = recService.guardarReceta(receta);
+            return new ResponseEntity<>(recetaActualizada, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/{id}") // DELETE lógico -> /receta/{id}
     public ResponseEntity<Void> eliminarRecetaLogicamente(@PathVariable Long id) {
         Optional<recetaEntity> recetaExistente = recService.recetaByIdActivo(id);
@@ -80,6 +93,16 @@ public class recetaController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/{rut}")
+    public ResponseEntity<?> obtenerRecetasActivasPorRut(@PathVariable String rut) {
+        List<recetaEntity> recetas = recService.obtenerRecetasActivasPorRutPaciente(rut);
+        if (recetas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron recetas activas para el paciente con RUT: " + rut);
+        }
+        return ResponseEntity.ok(recetas);
     }
 }
 

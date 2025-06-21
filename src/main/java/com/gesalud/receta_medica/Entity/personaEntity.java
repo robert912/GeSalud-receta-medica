@@ -14,7 +14,7 @@ public class personaEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "rut",  length = 11)
+    @Column(name = "rut",  length = 11, unique = true)
     private  String rut;
 
     @Column(name = "nombre", length = 80)

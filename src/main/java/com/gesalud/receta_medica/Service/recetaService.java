@@ -58,9 +58,19 @@ public class recetaService {
         return recetaRepository.findByActivoTrue();
     }
 
+    // Receta por rut
+    public List<recetaEntity> obtenerRecetasActivasPorRutPaciente(String rut) {
+        return recetaRepository.findByDisponibleTrueAndPacientePersonaRut(rut);
+    }
+
     // Para PUT
     public Optional<recetaEntity> obtenerRecetaById(Long id) {
         return recetaRepository.findById(id);
+    }
+
+    // Para bloquear la receta
+    public Optional<recetaEntity> buscarRecetaPorId(Long id) {
+        return recetaRepository.findByIdAndDisponibleTrue(id);
     }
 
     // Para DELETE lógico por ID
