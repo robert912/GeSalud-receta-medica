@@ -71,4 +71,8 @@ public class detalleRecetaService {
     public Optional<detalleRecetaEntity> buscarDetalleRecetaPorId(Long id) {
         return detalleRecetaRepository.findByIdAndActivoTrue(id);
     }
+
+    public Optional<detalleRecetaEntity> buscarPorId(Long id) {
+        return detalleRecetaRepository.findById(id);
+    }
 }

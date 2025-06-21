@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface recetaRepository extends JpaRepository<recetaEntity, Long> {
-    // Metodo para listar solo medicamentos activos
+    // Metodo para listar solo recetas activas
     List<recetaEntity> findByActivoTrue();
 
     // Para búsquedas individuales por ID, si necesitas validar estado activo

@@ -1,5 +1,6 @@
 package com.gesalud.receta_medica.Service;
 
+import com.gesalud.receta_medica.Entity.detalleRecetaEntity;
 import com.gesalud.receta_medica.Entity.farmaceuticoEntity;
 import com.gesalud.receta_medica.Entity.personaEntity;
 import com.gesalud.receta_medica.Repository.farmaceuticoRepository;
@@ -71,5 +72,9 @@ public class farmaceuticoService {
         farmaceuticoEntity farmaceuticoCreado = farmaceuticoRepository.save(nuevoFarmaceutico);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(farmaceuticoCreado);
+    }
+
+    public Optional<farmaceuticoEntity> buscarPorId(Long id) {
+        return farmaceuticoRepository.findById(id);
     }
 }
