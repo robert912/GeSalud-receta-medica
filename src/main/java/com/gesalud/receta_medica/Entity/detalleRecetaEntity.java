@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "receta_detalle")
-public class recetaDetalleEntity {
+@Table(name = "detalle_receta")
+public class detalleRecetaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,10 +21,10 @@ public class recetaDetalleEntity {
     private medicamentoEntity medicamento;
 
     @Column(name = "cantidad_recetada", length = 50)
-    private String cantidad_recetada;
+    private String cantidadRecetada;
 
     @Column(name = "dosis_diaria", length = 50)
-    private String dosis_diaria;
+    private String dosisDiaria;
 
     @Column(name = "activo")
     private Boolean activo;

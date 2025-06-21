@@ -77,4 +77,8 @@ public class recetaService {
     public Optional<recetaEntity> recetaByIdActivo(Long id) {
         return recetaRepository.findByIdAndActivoTrue(id);
     }
+
+    public Optional<recetaEntity> buscarPorId(Long id) {
+        return recetaRepository.findById(id);
+    }
 }

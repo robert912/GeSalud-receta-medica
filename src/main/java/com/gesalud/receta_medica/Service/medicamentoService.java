@@ -46,4 +46,8 @@ public class medicamentoService {
     public Optional<medicamentoEntity> medicamentoByIdActivo(Long id) {
         return medicamentoRepository.findByIdAndActivoTrue(id);
     }
+
+    public Optional<medicamentoEntity> buscarPorId(Long id) {
+        return medicamentoRepository.findById(id);
+    }
 }
