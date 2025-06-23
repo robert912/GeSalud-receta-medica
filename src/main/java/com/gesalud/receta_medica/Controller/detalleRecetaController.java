@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/detalle")
+@CrossOrigin(origins = "http://localhost:5173")
 public class detalleRecetaController {
     private detalleRecetaService detService;
 
@@ -54,12 +55,20 @@ public class detalleRecetaController {
                 detalle.setMedicamento(detalleActualizado.getMedicamento());
             }
 
-            if (detalleActualizado.getCantidadRecetada() != null && !detalleActualizado.getCantidadRecetada().isBlank()) {
-                detalle.setCantidadRecetada(detalleActualizado.getCantidadRecetada());
+            if (detalleActualizado.getConcentracion() != null && !detalleActualizado.getConcentracion().isBlank()) {
+                detalle.setConcentracion(detalleActualizado.getConcentracion());
             }
 
-            if (detalleActualizado.getDosisDiaria() != null && !detalleActualizado.getDosisDiaria().isBlank()) {
-                detalle.setDosisDiaria(detalleActualizado.getDosisDiaria());
+            if (detalleActualizado.getDosis() != null && !detalleActualizado.getDosis().isBlank()) {
+                detalle.setDosis(detalleActualizado.getDosis());
+            }
+
+            if (detalleActualizado.getFrecuencia() != null && !detalleActualizado.getFrecuencia().isBlank()) {
+                detalle.setFrecuencia(detalleActualizado.getFrecuencia());
+            }
+
+            if (detalleActualizado.getDuracion() != null && !detalleActualizado.getDuracion().isBlank()) {
+                detalle.setDuracion(detalleActualizado.getDuracion());
             }
 
             if (detalleActualizado.getActivo() != null) {

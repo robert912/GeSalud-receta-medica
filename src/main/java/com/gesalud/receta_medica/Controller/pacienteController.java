@@ -1,6 +1,7 @@
 package com.gesalud.receta_medica.Controller;
 
 import com.gesalud.receta_medica.Entity.pacienteEntity;
+import com.gesalud.receta_medica.Entity.recetaEntity;
 import com.gesalud.receta_medica.Service.pacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/paciente")
+@CrossOrigin(origins = "http://localhost:5173")
 public class pacienteController {
     private pacienteService pacService;
 
@@ -30,6 +32,33 @@ public class pacienteController {
     public ResponseEntity<List<pacienteEntity>> todasLosPacientesActivas(){
         List<pacienteEntity> paciente = pacService.obtenerPacienteActivas();
         return ResponseEntity.ok(paciente);//new
+    }
+
+    @GetMapping("/{rut}")
+    public ResponseEntity<?> obtenerPacientePorRut(@PathVariable String rut) {
+        try {
+            if (!validarRut(rut)) {
+                return ResponseEntity.badRequest()
+                        .body("El RUT proporcionado no tiene un formato válido");
+            }
+
+            pacienteEntity paciente = pacService.obtenerPacienteActivasPorRut(rut);
+            if (paciente == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("No se encontró un paciente con el RUT: " + rut);
+            }
+
+            if (paciente.getActivo() != null && !paciente.getActivo()) {
+                return ResponseEntity.status(HttpStatus.GONE)
+                        .body("El paciente con RUT " + rut + " existe pero no está activo");
+            }
+
+            return ResponseEntity.ok(paciente);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al procesar la solicitud: " + e.getMessage());
+        }
     }
 
     @PostMapping // POST -> /paciente
@@ -67,5 +96,21 @@ public class pacienteController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    // Método auxiliar para validar formato de RUT chileno
+    private boolean validarRut(String rut) {
+        if (rut == null || rut.isEmpty()) return false;
+
+        // Eliminar puntos y guión si existen
+        rut = rut.replace(".", "").replace("-", "");
+
+        // Validar formato básico (al menos 7 dígitos + 1 dígito verificador)
+        if (!rut.matches("^[0-9]{7,8}[0-9kK]{1}$")) {
+            return false;
+        }
+
+        // Aquí podrías agregar validación del dígito verificador si lo necesitas
+        return true;
     }
 }

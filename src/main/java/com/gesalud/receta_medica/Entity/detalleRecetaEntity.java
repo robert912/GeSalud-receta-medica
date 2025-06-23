@@ -20,11 +20,17 @@ public class detalleRecetaEntity {
     @JoinColumn(name = "id_medicamento", referencedColumnName = "id")
     private medicamentoEntity medicamento;
 
-    @Column(name = "cantidad_recetada", length = 50)
-    private String cantidadRecetada;
+    @Column(name = "concentracion", length = 50)
+    private String concentracion;
 
-    @Column(name = "dosis_diaria", length = 50)
-    private String dosisDiaria;
+    @Column(name = "dosis", length = 50)
+    private String dosis;
+
+    @Column(name = "frecuencia", length = 50)
+    private String frecuencia;
+
+    @Column(name = "duracion", length = 50)
+    private String duracion;
 
     @Column(name = "activo")
     private Boolean activo;

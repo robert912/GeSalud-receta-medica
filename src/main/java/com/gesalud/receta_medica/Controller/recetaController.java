@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/receta")
+@CrossOrigin(origins = "http://localhost:5173")
 public class recetaController {
     private recetaService recService;
 
@@ -31,6 +32,16 @@ public class recetaController {
     public ResponseEntity<List<recetaEntity>> todosLosRecetaActivas(){
         List<recetaEntity> receta = recService.obtenerRecetaActivos();
         return ResponseEntity.ok(receta);
+    }
+
+    @GetMapping("/{rut}")
+    public ResponseEntity<?> obtenerRecetasActivasPorRut(@PathVariable String rut) {
+        List<recetaEntity> recetas = recService.obtenerRecetasActivasPorRutPaciente(rut);
+        if (recetas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron recetas activas para el paciente con RUT: " + rut);
+        }
+        return ResponseEntity.ok(recetas);
     }
 
     @PostMapping
@@ -93,16 +104,6 @@ public class recetaController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @GetMapping("/{rut}")
-    public ResponseEntity<?> obtenerRecetasActivasPorRut(@PathVariable String rut) {
-        List<recetaEntity> recetas = recService.obtenerRecetasActivasPorRutPaciente(rut);
-        if (recetas.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron recetas activas para el paciente con RUT: " + rut);
-        }
-        return ResponseEntity.ok(recetas);
     }
 }
 

@@ -15,4 +15,6 @@ public interface pacienteRepository extends JpaRepository<pacienteEntity, Long> 
     Optional<pacienteEntity> findByIdAndActivoTrue(Long id);
 
     Optional<pacienteEntity> findByPersona(personaEntity persona);
+
+    pacienteEntity findByActivoTrueAndPersonaRut(String rut);
 }

@@ -2,6 +2,7 @@ package com.gesalud.receta_medica.Service;
 
 import com.gesalud.receta_medica.Entity.pacienteEntity;
 import com.gesalud.receta_medica.Entity.personaEntity;
+import com.gesalud.receta_medica.Entity.recetaEntity;
 import com.gesalud.receta_medica.Repository.pacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,10 @@ public class pacienteService {
 
     public Optional<pacienteEntity> buscarPorId(Long id) {
         return pacienteRepository.findById(id);
+    }
+
+    // Paciente por rut
+    public pacienteEntity obtenerPacienteActivasPorRut(String rut) {
+        return pacienteRepository.findByActivoTrueAndPersonaRut(rut);
     }
 }
