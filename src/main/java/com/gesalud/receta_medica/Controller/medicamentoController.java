@@ -66,20 +66,26 @@ public class medicamentoController {
             if (medicamentoActualizado.getUso() != null && !medicamentoActualizado.getUso().isBlank()) {
                 medicamento.setUso(medicamentoActualizado.getUso());
             }
-            if (medicamentoActualizado.getControlado()  != null) {
+            if (medicamentoActualizado.getControlado() != null) {
                 medicamento.setControlado(medicamentoActualizado.getControlado());
+            }
+            if (medicamentoActualizado.getConcentracion() != null && !medicamentoActualizado.getConcentracion().isBlank()) {
+                medicamento.setConcentracion(medicamentoActualizado.getConcentracion());
             }
             if (medicamentoActualizado.getPresentacion() != null && !medicamentoActualizado.getPresentacion().isBlank()) {
                 medicamento.setPresentacion(medicamentoActualizado.getPresentacion());
             }
-            if (medicamentoActualizado.getDosis_habitual() != null && !medicamentoActualizado.getDosis_habitual().isBlank()) {
-                medicamento.setDosis_habitual(medicamentoActualizado.getDosis_habitual());
+            if (medicamentoActualizado.getDosis() != null && !medicamentoActualizado.getDosis().isBlank()) {
+                medicamento.setDosis(medicamentoActualizado.getDosis());
+            }
+            if (medicamentoActualizado.getFrecuencia() != null && !medicamentoActualizado.getFrecuencia().isBlank()) {
+                medicamento.setFrecuencia(medicamentoActualizado.getFrecuencia());
+            }
+            if (medicamentoActualizado.getDuracion() != null && !medicamentoActualizado.getDuracion().isBlank()) {
+                medicamento.setDuracion(medicamentoActualizado.getDuracion());
             }
             if (medicamentoActualizado.getIndicaciones() != null && !medicamentoActualizado.getIndicaciones().isBlank()) {
                 medicamento.setIndicaciones(medicamentoActualizado.getIndicaciones());
-            }
-            if (medicamentoActualizado.getContraindicaciones() != null && !medicamentoActualizado.getContraindicaciones().isBlank()) {
-                medicamento.setContraindicaciones(medicamentoActualizado.getContraindicaciones());
             }
             if (medicamentoActualizado.getStock() >= 0) {
                 medicamento.setStock(medicamentoActualizado.getStock());

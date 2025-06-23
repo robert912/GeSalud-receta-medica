@@ -21,17 +21,23 @@ public class medicamentoEntity {
     @Column(name = "controlado")
     private Boolean controlado;
 
+    @Column(name = "concentracion", length = 50)
+    private String concentracion;
+
     @Column(name = "presentacion", length = 50)
     private String presentacion;
 
-    @Column(name = "dosis_habitual", length = 50)
-    private String dosis_habitual;
+    @Column(name = "dosis", length = 50)
+    private String dosis;
+
+    @Column(name = "frecuencia", length = 50)
+    private String frecuencia;
+
+    @Column(name = "duracion", length = 50)
+    private String duracion;
 
     @Column(name = "indicaciones",  length = 250)
     private  String indicaciones;
-
-    @Column(name = "contraindicaciones",  length = 250)
-    private  String contraindicaciones;
 
     @Column(name = "stock")
     private long stock = 0;

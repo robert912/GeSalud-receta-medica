@@ -6,7 +6,9 @@ import lombok.Data;
 public class detalleRecetaDTO {
     private Long receta;
     private Long medicamento;
-    private String cantidad;
-    private String dosisDiaria;
+    private String concentracion;
+    private String dosis;
+    private String frecuencia;
+    private String duracion;
     private Boolean activo;
 }
