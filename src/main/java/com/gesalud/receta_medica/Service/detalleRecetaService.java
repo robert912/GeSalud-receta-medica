@@ -60,8 +60,8 @@ public class detalleRecetaService {
     }
 
     // Receta por receta
-    public List<detalleRecetaEntity> obtenerDetalleRecetasActivasPorReceta(Long id) {
-        return detalleRecetaRepository.findByActivoTrueAndRecetaId(id);
+    public List<detalleRecetaEntity> obtenerDetalleRecetasPorReceta(Long id) {
+        return detalleRecetaRepository.findByrecetaId(id);
     }
 
     // Para PUT

@@ -34,6 +34,16 @@ public class detalleRecetaController {
         return ResponseEntity.ok(detalle);
     }
 
+    @GetMapping("/receta/{id}")// GET -> /detalle/receta/{id}
+    public ResponseEntity<?> obtenerDetalleRecetasActivasPorReceta(@PathVariable Long id) {
+        List<detalleRecetaEntity> detalle = detService.obtenerDetalleRecetasPorReceta(id);
+        if (detalle.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron detalles para receta: " + id);
+        }
+        return ResponseEntity.ok(detalle);
+    }
+
     @PostMapping
     public ResponseEntity<?> crearReceta(@RequestBody detalleRecetaDTO nuevoDetalle) {
         detalleRecetaEntity detalleCreado = detService.guardarDetalleRecetaDTO(nuevoDetalle);
@@ -93,16 +103,6 @@ public class detalleRecetaController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @GetMapping("/receta/{id}")// GET -> /detalle/receta/{id}
-    public ResponseEntity<?> obtenerDetalleRecetasActivasPorReceta(@PathVariable Long id) {
-        List<detalleRecetaEntity> detalle = detService.obtenerDetalleRecetasActivasPorReceta(id);
-        if (detalle.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron detalles para receta: " + id);
-        }
-        return ResponseEntity.ok(detalle);
     }
 }
 

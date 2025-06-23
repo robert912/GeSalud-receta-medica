@@ -13,6 +13,9 @@ public interface detalleRecetaRepository extends JpaRepository<detalleRecetaEnti
     // Para búsquedas individuales por ID, si necesitas validar estado activo
     Optional<detalleRecetaEntity> findByIdAndActivoTrue(Long id);
 
-    // Buscar receta por rut disponible
+    // Buscar detalle receta por id receta disponible
     List<detalleRecetaEntity> findByActivoTrueAndRecetaId(Long id);
+
+    // Buscar detalle receta por id receta
+    List<detalleRecetaEntity> findByrecetaId(Long id);
 }
