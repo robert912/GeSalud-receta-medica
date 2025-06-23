@@ -40,8 +40,10 @@ public class detalleRecetaService {
 
         nuevoDetalle.setReceta(recetaOpt.get());
         nuevoDetalle.setMedicamento(medicinaOpt.get());
-        nuevoDetalle.setDosisDiaria(detalleDto.getDosisDiaria());
-        nuevoDetalle.setCantidadRecetada(detalleDto.getCantidad());
+        nuevoDetalle.setConcentracion(detalleDto.getConcentracion());
+        nuevoDetalle.setDosis(detalleDto.getDosis());
+        nuevoDetalle.setFrecuencia(detalleDto.getFrecuencia());
+        nuevoDetalle.setDuracion(detalleDto.getDuracion());
         nuevoDetalle.setActivo(true);
 
         return detalleRecetaRepository.save(nuevoDetalle);
