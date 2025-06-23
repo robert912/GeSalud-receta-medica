@@ -39,6 +39,13 @@ public class medicamentoController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/id/{id}") //GET -> /medicamento/1
+    public ResponseEntity<medicamentoEntity> obtenerMedicamentoPorId(@PathVariable Long id){
+        return medService.buscarPorId(id)
+                .map(medicamento -> new ResponseEntity<>(medicamento, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping
     public ResponseEntity<?> crearMedicamento(@RequestBody medicamentoEntity nuevoMedicamento) {
         nuevoMedicamento.setActivo(true);
