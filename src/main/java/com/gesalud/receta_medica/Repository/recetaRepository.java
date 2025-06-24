@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface recetaRepository extends JpaRepository<recetaEntity, Long> {
     // Metodo para listar solo recetas activas
-    List<recetaEntity> findByActivoTrue();
+    List<recetaEntity> findByActivoTrueOrderByFechaCreacionDesc();
 
     // Para búsquedas individuales por ID, si necesitas validar estado activo
     Optional<recetaEntity> findByIdAndActivoTrue(Long id);
@@ -17,5 +17,5 @@ public interface recetaRepository extends JpaRepository<recetaEntity, Long> {
     Optional<recetaEntity> findByIdAndDisponibleTrue(Long id);
 
     // Buscar receta por rut disponible
-    List<recetaEntity> findByDisponibleTrueAndPacientePersonaRut(String rut);
+    List<recetaEntity> findByDisponibleTrueAndActivoTrueAndPacientePersonaRut(String rut);
 }

@@ -8,7 +8,7 @@ import com.gesalud.receta_medica.dto.recetaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +41,7 @@ public class recetaService {
 
         nuevaReceta.setPaciente(pacienteOpt.get());
         nuevaReceta.setMedico(medicoOpt.get());
-        nuevaReceta.setFechaCreacion(LocalDate.now());
+        nuevaReceta.setFechaCreacion(LocalDateTime.now());
         nuevaReceta.setDisponible(true);
         nuevaReceta.setActivo(true);
 
@@ -55,12 +55,12 @@ public class recetaService {
 
     // Solo receta activos
     public List<recetaEntity> obtenerRecetaActivos() {
-        return recetaRepository.findByActivoTrue();
+        return recetaRepository.findByActivoTrueOrderByFechaCreacionDesc();
     }
 
     // Receta por rut
     public List<recetaEntity> obtenerRecetasActivasPorRutPaciente(String rut) {
-        return recetaRepository.findByDisponibleTrueAndPacientePersonaRut(rut);
+        return recetaRepository.findByDisponibleTrueAndActivoTrueAndPacientePersonaRut(rut);
     }
 
     // Para PUT

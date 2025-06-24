@@ -3,7 +3,7 @@ package com.gesalud.receta_medica.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -26,7 +26,7 @@ public class recetaEntity {
     private Boolean disponible;
 
     @Column(name = "fecha_emision")
-    private LocalDate fechaCreacion;
+    private LocalDateTime fechaCreacion;
 
     @Column(name = "activo")
     private Boolean activo;
