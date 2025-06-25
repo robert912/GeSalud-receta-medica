@@ -35,6 +35,13 @@ public class recetaController {
         return ResponseEntity.ok(receta);
     }
 
+    @GetMapping("/medico/{id_medico}") //GET -> /receta/medico/1
+    public ResponseEntity<List<recetaEntity>> todasLasRecetaActivasPorMedico(@PathVariable Long id_medico){
+        List<recetaEntity> receta = recService.obtenerRecetaActivosPorMedico(id_medico);
+        return ResponseEntity.ok(receta);
+    }
+
+
     @GetMapping("/{rut}")
     public ResponseEntity<?> obtenerRecetasActivasPorRut(@PathVariable String rut) {
         List<recetaEntity> recetas = recService.obtenerRecetasActivasPorRutPaciente(rut);

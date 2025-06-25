@@ -10,12 +10,15 @@ public interface recetaRepository extends JpaRepository<recetaEntity, Long> {
     // Metodo para listar solo recetas activas
     List<recetaEntity> findByActivoTrueOrderByFechaCreacionDesc();
 
-    // Para búsquedas individuales por ID, si necesitas validar estado activo
+    // Solo receta activos por medico y fecha de creacion Desc
+    List<recetaEntity> findByActivoTrueAndMedicoIdOrderByFechaCreacionDesc(Long idMedico);
+
+    // Para búsquedas individuales por ID y estado activo
     Optional<recetaEntity> findByIdAndActivoTrue(Long id);
 
-    // Para búsquedas individuales por ID, si necesitas validar estado activo
+    // Para búsquedas individuales por ID y disponible
     Optional<recetaEntity> findByIdAndDisponibleTrue(Long id);
 
-    // Buscar receta por rut disponible
+    // Buscar receta por rut disponible, disponible y activo
     List<recetaEntity> findByDisponibleTrueAndActivoTrueAndPacientePersonaRut(String rut);
 }

@@ -53,9 +53,14 @@ public class recetaService {
         return recetaRepository.findAll();
     }
 
-    // Solo receta activos
+    // Solo receta activos por fecha de creacion Desc
     public List<recetaEntity> obtenerRecetaActivos() {
         return recetaRepository.findByActivoTrueOrderByFechaCreacionDesc();
+    }
+
+    // Solo receta activas por medico y fecha de creacion Desc
+    public List<recetaEntity> obtenerRecetaActivosPorMedico(Long id_medico) {
+        return recetaRepository.findByActivoTrueAndMedicoIdOrderByFechaCreacionDesc(id_medico);
     }
 
     // Receta por rut
