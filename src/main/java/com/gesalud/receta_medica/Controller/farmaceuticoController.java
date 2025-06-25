@@ -2,6 +2,7 @@ package com.gesalud.receta_medica.Controller;
 
 import com.gesalud.receta_medica.Entity.farmaceuticoEntity;
 import com.gesalud.receta_medica.Service.farmaceuticoService;
+import com.gesalud.receta_medica.constants.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/farmaceutico")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = AppConstants.FRONTEND_URL)
 public class farmaceuticoController {
     private farmaceuticoService farService;
 

@@ -2,6 +2,7 @@ package com.gesalud.receta_medica.Controller;
 
 import com.gesalud.receta_medica.Entity.detalleRecetaEntity;
 import com.gesalud.receta_medica.Service.detalleRecetaService;
+import com.gesalud.receta_medica.constants.AppConstants;
 import com.gesalud.receta_medica.dto.detalleRecetaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/detalle")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = AppConstants.FRONTEND_URL)
 public class detalleRecetaController {
     private detalleRecetaService detService;
 
