@@ -35,6 +35,12 @@ public class medicoController {
         return ResponseEntity.ok(medico);//new
     }
 
+    @GetMapping("/id/{id}") //GET -> /medico/id/1
+    public ResponseEntity<Optional<medicoEntity>> obtenermedicoPorId(@PathVariable Long id) {
+        Optional<medicoEntity> medico = medService.medicoByIdActivo(id);
+        return ResponseEntity.ok(medico);
+    }
+
     @PostMapping // POST -> /medico
     public ResponseEntity<?> crearMedico(@RequestBody medicoEntity nuevoMedico) {
         return medService.crearMedicoConValidacion(nuevoMedico);

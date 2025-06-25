@@ -34,6 +34,12 @@ public class farmaceuticoController {
         return ResponseEntity.ok(farmaceutico);//new
     }
 
+    @GetMapping("/id/{id}") //GET -> /farmaceutico/id/1
+    public ResponseEntity<Optional<farmaceuticoEntity>> obtenerFarmaceuticoPorId(@PathVariable Long id) {
+        Optional<farmaceuticoEntity> medico = farService.farmaceuticoByIdActivo(id);
+        return ResponseEntity.ok(medico);
+    }
+
     @PostMapping // POST -> /farmaceutico
     public ResponseEntity<?> crearFarmaceutico(@RequestBody farmaceuticoEntity nuevoFarmaceutico) {
         return farService.crearFarmaceuticoConValidacion(nuevoFarmaceutico);
